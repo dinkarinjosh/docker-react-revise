@@ -1,5 +1,8 @@
 sudo: required
-language: generic
+language: node_js
+node_js:
+- 14.15.4
+cache: npm
 services: docker
 
 before_install: 
@@ -7,3 +10,15 @@ before_install:
 
 script: 
 - docker container run dinkarinjosh/react-app-revise -e CI=true npm run test -- --coverage
+
+deploy: 
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: docker-react-revise
+  env: Dockerreactrevise-env
+  bucket: elasticbeanstalk-us-east-2-318587505622
+  bucket_path: docker-react-revise
+  on:
+     branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
