@@ -6,4 +6,4 @@ before_install:
 - docker image build -t dinkarinjosh/react-app-revise -f Dockerfile.dev .
 
 script: 
-- docker container run dinkarinjosh/react-app-revise -e CI=true npm run test
+- docker container run dinkarinjosh/react-app-revise -e CI=true npm run test -- --coverage
